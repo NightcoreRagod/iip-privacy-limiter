@@ -1,0 +1,14 @@
+{
+  "name": "privacy-chat",
+  "version": "1.0.0",
+  "description": "Privacy-preserving E2EE chat (server as relay only)",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "ws": "^8.18.0"
+  }
+}

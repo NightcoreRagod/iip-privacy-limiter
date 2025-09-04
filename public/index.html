@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>E2EE Chat (Privacy-Preserving)</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <!-- Tailwind for quick clean UI (optional) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- TweetNaCl for crypto -->
+  <script src="https://cdn.jsdelivr.net/npm/tweetnacl@1.0.3/nacl.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/tweetnacl-util@0.15.1/nacl-util.min.js"></script>
+</head>
+<body class="bg-slate-50 text-slate-900">
+  <div class="max-w-4xl mx-auto p-4">
+    <h1 class="text-2xl font-bold mb-4">🔐 Privacy-Preserving Chat</h1>
+
+    <div id="auth" class="mb-4 grid gap-3 sm:grid-cols-4">
+      <input id="name" class="border p-2 rounded col-span-1" placeholder="Display name (anonymous)" />
+      <input id="room" class="border p-2 rounded col-span-1" placeholder="Room (e.g., cse-final)" />
+      <button id="genKeys" class="bg-slate-800 text-white rounded px-3 py-2 col-span-1">Generate Keys</button>
+      <button id="join" class="bg-blue-600 text-white rounded px-3 py-2 col-span-1">Join Room</button>
+      <div class="col-span-4 text-sm text-slate-600" id="keyStatus">No keys yet.</div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="md:col-span-2">
+        <div id="chat" class="border rounded p-3 h-[55vh] overflow-y-auto bg-white mb-3"></div>
+        <div class="flex gap-2">
+          <input id="message" class="flex-1 border rounded p-2" placeholder="Type a secret message..." />
+          <input id="ttl" type="number" min="0" value="0" class="w-28 border rounded p-2" title="Self-destruct seconds (0 = keep)" />
+          <button id="send" class="bg-green-600 text-white rounded px-4 py-2">Send</button>
+        </div>
+        <div class="text-xs text-slate-500 mt-1">TTL: self-destruct seconds (client-side). 0 = no auto-delete.</div>
+      </div>
+
+      <div>
+        <div class="border rounded p-3 bg-white">
+          <h2 class="font-semibold mb-2">Peers in Room</h2>
+          <ul id="peers" class="space-y-2"></ul>
+        </div>
+        <div class="border rounded p-3 bg-white mt-3">
+          <h2 class="font-semibold mb-2">Your Public Key</h2>
+          <textarea id="myPub" class="w-full border p-2 rounded text-xs" rows="3" readonly></textarea>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
